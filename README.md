@@ -17,3 +17,6 @@ Repo for jasprafka's Helgrind TTRPG.
     - Script(s) to automate the process of validating/editing/updating all of these things
         - Unittests for the scripts
 
+
+## TODO
+- Update me!
