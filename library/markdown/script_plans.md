@@ -1,7 +1,9 @@
 # Scripts Plans
+
 Plans for the various scripts I want to make.
 
 ## Strictly Necessary Functionality
+
 This list includes all of the 'must-haves' for [initial population project](https://github.com/users/jasprafka/projects/1/views/1). They all need their own issue under the project.
 - Schema validator (_This is one of the first things you have to do!_)
     - Functionality to validate a single JSON file with a single schema (preferably auto-detect the schema!) as well as to validate all JSON files under data
@@ -15,6 +17,7 @@ This list includes all of the 'must-haves' for [initial population project](http
     - Basically a `requirements.txt` file and an updater script to ensure it's up-to-date, as well as ensure any other requirements are up-to-date.
 
 ## Long-Term Script Ideas
+
 Ideas for scripts that I want to make eventually.
 - Character generator
     - Allows you to easily and quickly create a character of any level
@@ -22,6 +25,7 @@ Ideas for scripts that I want to make eventually.
 - NPC Statblock generator
 
 ## How to create codeblocks in markdown
+
 Here is an example of a code block (in python):
 ```python
 def function():

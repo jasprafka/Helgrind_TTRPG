@@ -1,9 +1,15 @@
 # JSON Support Plan
+
 Rough outline of the different JSON structures I'll need to support.
+
 ## Outline
+
 ### What do I need to support?
+
 Support in this context means there is a game rule/datatype that needs to be stored in a human-readable/writable way, and there must be a schema for the JSON structure defining that rule/datatype.
+
 #### Ancestries
+
 - Flavor text
 - List of ancestry talents
 - Traits
@@ -15,9 +21,13 @@ Support in this context means there is a game rule/datatype that needs to be sto
     - Special Senses
 - Base HP increase
 - Heritage
+
 #### Character Advancement
+
 - Level up table, basically
+
 #### Character sheets
+
 - Name
 - Level
     - Current XP
@@ -54,7 +64,9 @@ Support in this context means there is a game rule/datatype that needs to be sto
 - Reputation
 - Senses
 - Languages
+
 #### Talents
+
 - Description
 - Prerequisites
     - Stat requirements
@@ -64,7 +76,9 @@ Support in this context means there is a game rule/datatype that needs to be sto
 - Mechanical Effects
     - Does the talent increase your speed, HP, armor, etc?
     - Format this in a way that can easily modify your character sheet
+
 #### Abilities (sorceries, incantations, techniques, template for future ability types)
+
 - FP cost
 - Description
 - Activation
@@ -75,7 +89,9 @@ Support in this context means there is a game rule/datatype that needs to be sto
 - Attack VS.
     - Effect on hit
     - Effect on miss
+
 #### Equipment
+
 - Description
 - Slots
 - Value
@@ -87,7 +103,9 @@ Support in this context means there is a game rule/datatype that needs to be sto
         - Alchemy Items
         - Mechanical Items
         - Magic Items
+
 #### NPC statblocks (monsters, mostly, but stuff like friendly NPCs too)
+
 - Name
 - Optional description
 - Stats
@@ -106,7 +124,9 @@ Support in this context means there is a game rule/datatype that needs to be sto
 - Reactions
 - Items
 - Attribute Scores
+
 #### NPC Statblock suggestions
+
 - Not sure exactly what to do here, but some ideas:
     - HP/Armor/Dmg by level
     - Expected HP based on level/creature type
