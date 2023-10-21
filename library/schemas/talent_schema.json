@@ -1,0 +1,60 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "talent_schema",
+    "description": "Schema for Helgrind TTRPG talents. See https://json-schema.org/draft/2020-12/json-schema-validation#name-introduction for more info.",
+    "type": "object",
+    "$defs": {
+        "attributes_def": {
+            "description": "Required value of any attributes.",
+            "type": "object",
+            "properties": {
+                "str": {"type": "integer"},
+                "dex": {"type": "integer"},
+                "bod": {"type": "integer"},
+                "int": {"type": "integer"},
+                "cha": {"type": "integer"},
+                "mnd": {"type": "integer"}
+            },
+            "minProperties": 1,
+            "additionalProperties": false
+        }
+    },
+    "properties": {
+        "name": {
+            "description": "Name of the talent. MAY NOT contain markdown syntax.",
+            "type": "string"
+        },
+        "description": {
+            "description": "Description of the talent. MAY contain markdown syntax.",
+            "type": "string"
+        },
+        "prerequisites": {
+            "type": "object",
+            "description": "Prerequisites for this talent.",
+            "properties": {
+                "level": {
+                    "description": "The level prerequisite of this talent.",
+                    "type": "integer",
+                    "exclusiveMinimum": 1
+                },
+                "attributes": {"$ref": "#/$defs/attributes_def"},
+                "ancestry": {
+                    "description": "Required Ancestry",
+                    "type": "string"
+                },
+                "other_talents": {
+                    "description": "Other talents required.",
+                    "type": "array",
+                    "items": { // Maybe a bad keyword?
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                },
+                "required": ["level"]
+            }
+        }
+    },
+    "required": ["name", "description", "prerequisites"],
+    "additionalProperties": false
+}
