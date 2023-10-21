@@ -1,5 +1,6 @@
 """Script to validate JSON files using the schemas under <ROOT>/library/schemas/"""
 
+import os
 import sys
 import json
 import logging
@@ -7,7 +8,7 @@ import argparse
 import utilities
 import jsonschema
 
-LOGGER = utilities.logger_setup(__name__)
+LOGGER = logging.getLogger(os.path.basename(__file__))
 """Logger for this module."""
 
 def _process_args(argv: list) -> argparse.Namespace:
@@ -19,16 +20,9 @@ def _process_args(argv: list) -> argparse.Namespace:
     Returns:
         args: Parsed args with args as properties on the object.
     """
-    parser = utilities.parser_setup(__name__, '')
-
-    # TODO add arguments
-
-    args = parser.parse_args(argv)
-    if args.debug:
-        LOGGER.setLevel(logging.DEBUG)
-    elif args.verbose:
-        LOGGER.setLevel(logging.INFO)
-    LOGGER.debug('args: %s', args)
+    # TODO update description
+    parser = argparse.ArgumentParser(os.path.basename(__file__), description='Pending description.')
+    args = utilities.parser_setup(parser, argv, LOGGER)
 
     return args
 

@@ -3,9 +3,10 @@
 import os
 import sys
 import logging
+import argparse
 import utilities
 
-LOGGER = utilities.logger_setup(__name__)
+LOGGER = logging.getLogger(os.path.basename(__file__))
 """Logger for this module."""
 
 _ROOT = utilities.get_root_dir()
@@ -20,7 +21,7 @@ def _process_args(argv):
     Returns:
         args: Parsed args with args as properties on the object.
     """
-    parser = utilities.parser_setup(__name__, '')
+    parser = argparse.ArgumentParser(os.path.basename(__file__), description='Ensure environment is setup for this project.')
     parser.add_argument(
         '-r',
         '--requirements',
@@ -28,12 +29,7 @@ def _process_args(argv):
         dest='requirements_file',
         default=None
     )
-    args = parser.parse_args(argv)
-    if args.debug:
-        LOGGER.setLevel(logging.DEBUG)
-    elif args.verbose:
-        LOGGER.setLevel(logging.INFO)
-    LOGGER.debug('args: %s', args)
+    args = utilities.parser_setup(parser, argv, LOGGER)
     return args
 
 def _validate_python_packages(req_file: str=None):
