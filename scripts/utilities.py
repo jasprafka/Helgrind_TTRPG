@@ -9,20 +9,18 @@ import subprocess
 class RootNotFoundException(Exception):
     """Exception class for if unable to determine worktree root."""
 
-def parser_setup(name: str, desc: str, usage: str=None) -> argparse.ArgumentParser:
+
+def parser_setup(parser: argparse.ArgumentParser, argv: list, logger: logging.Logger=None) -> argparse.Namespace:
     """Create parser with basic functionality.
 
     Args:
-        name: Name of the program to create the parser for.
-        desc: Description of the program to create the parser for.
-        usage: Command-line invocation example.
+        parser: Argument parser to setup.
+        argv: list of args to parse.
+        logger: Logger to configure.
 
     Returns:
-        parser: Parser with basic functionality (like debugging).
+        args: Parsed args with values as properties on the object.
     """
-    parser = argparse.ArgumentParser(prog=name, description=desc)
-    if usage is not None:
-        parser.usage = usage
     logging_group = parser.add_mutually_exclusive_group()
     logging_group.add_argument(
         '-v',
@@ -40,7 +38,34 @@ def parser_setup(name: str, desc: str, usage: str=None) -> argparse.ArgumentPars
         dest='debug',
         default=False
     )
-    return parser
+
+    argv = parser.parse_args()
+
+    if logger is not None:
+        _logger_config(logger, argv)
+        logger.debug('args: %s', argv)
+
+    return argv
+
+
+def _logger_config(logger: logging.Logger, args: argparse.Namespace) -> None:
+    """Configure an existing logger based on the verbosity of the parsed args.
+
+    Args:
+        logger: Logger to configure.
+        args: Parsed args as configured in parser_setup(). 
+
+    NOTE: This function should never be called directly and only used from inside parser_setup().
+    """
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+    elif args.verbose:
+        logger.setLevel(logging.INFO)
+    else:
+        logger.setLevel(logging.WARNING)
+    handler = logging.StreamHandler(sys.stdout)
+    logger.addHandler(handler)
+
 
 def logger_setup(logger_name: str, logger_level: int=logging.WARNING) -> logging.Logger:
     """Create and return a logger formatted to print to stdout."""
@@ -50,9 +75,11 @@ def logger_setup(logger_name: str, logger_level: int=logging.WARNING) -> logging
     logger.addHandler(handler)
     return logger
 
+
 def run_command(cmd_str: str, time_out=None) -> int:
     """Run cmd_str with optional timeout."""
     return subprocess.check_call(cmd_str, timeout=time_out)
+
 
 def get_root_dir(entry_path: str=None, max_steps: int=10, except_on_fail: bool=True) -> str:
     """Determine the root dir of the worktree.
