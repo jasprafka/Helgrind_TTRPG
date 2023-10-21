@@ -35,7 +35,7 @@
                 "level": {
                     "description": "The level prerequisite of this talent.",
                     "type": "integer",
-                    "exclusiveMinimum": 1
+                    "minimum": 1
                 },
                 "attributes": {"$ref": "#/$defs/attributes_def"},
                 "ancestry": {
@@ -50,9 +50,9 @@
                     },
                     "minItems": 1,
                     "uniqueItems": true
-                },
-                "required": ["level"]
-            }
+                }
+            },
+            "required": ["level"]
         }
     },
     "required": ["name", "description", "prerequisites"],
