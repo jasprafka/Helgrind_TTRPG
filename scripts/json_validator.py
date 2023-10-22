@@ -102,7 +102,6 @@ def _validate_json_file(json_path: str, schema_path: str) -> bool:
     for my_obj in json_list:
         validity.append(_object_is_valid(my_obj, my_schema, json_path))
     if not all(validity):
-        LOGGER.info('%s is not valid! Use -d option for more information.', json_path)
         return False
     return True
 
@@ -128,7 +127,12 @@ def main(argv: list) -> None:
 
     # Validate the contents of a single JSON file
     if args.json_path and args.schema_path:
-        _validate_json_file(args.json_path, args.schema_path)
+        if _validate_json_file(args.json_path, args.schema_path):
+            print(f'{args.json_path} is valid!')
+        else:
+            print(f'{args.json_path} is not valid! Use -d option for more information.')
+    else:
+        LOGGER.info('Unsupported functionality; you must specify both an input JSON file and a schema with which to validate it.')
 
 
 if __name__ == '__main__':

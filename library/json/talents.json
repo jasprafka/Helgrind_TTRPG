@@ -2,22 +2,30 @@
     // Note that you must use JSMIN to support comments
     // Also note that any strings may contain markdown syntax if desired
     {
-        "name": "pugilist",
-        "description": "You are well versed in the subtle art of cracking skulls. The base damage for your unarmed strikes is **1d6 + Str** instead of just **Str**.",
-        "prerequisites": {
-            "level": 1,
-            "attributes": {
-                "str": 2
-            }
-        }
-    },
-    {
-        "name": "swift_I",
+        "name": "Swift_I",
         "description": "Your **speed** increases by 5 feet.",
         "prerequisites": {
             "level": 1,
             "attributes": {
                 "dex": 2
+            }
+        }
+    },
+    {
+        "name": "Archer",
+        "description": "When you hit a target by shooting them with a bow, the target takes an extra **2** damage.",
+        "prerequisites": {
+            "level": 2,
+            "other_talents": ["advanced_weapon_training_bows"]
+        }
+    },
+    {
+        "name": "Pugilist",
+        "description": "You are well versed in the subtle art of cracking skulls. The base damage for your unarmed strikes is **1d6 + Str** instead of just **Str**.",
+        "prerequisites": {
+            "level": 1,
+            "attributes": {
+                "str": 2
             }
         }
     }
