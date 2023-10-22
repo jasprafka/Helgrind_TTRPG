@@ -99,13 +99,13 @@ def get_root_dir(entry_path: str=None, max_steps: int=10, except_on_fail: bool=T
     start_dir = os.getcwd()
     root_dir = ''
     for _ in range(max_steps):
-        os.chdir('../')
         if os.path.exists('.root'):
             root_dir = os.getcwd()
             break
+        os.chdir('../')
     os.chdir(start_dir)
 
     if except_on_fail and not root_dir:
         raise RootNotFoundException(f'Unable to determine root of worktree! Start dir: {start_dir}')
 
-    return root_dir
+    return os.path.abspath(root_dir)  # Ensure root path is absolute path

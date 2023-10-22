@@ -32,6 +32,7 @@ def _process_args(argv):
     args = utilities.parser_setup(parser, argv, LOGGER)
     return args
 
+
 def _validate_python_packages(req_file: str=None):
     """Ensure required python packages are installed. Optionally specify path to requirements.txt.
 
@@ -49,11 +50,13 @@ def _validate_python_packages(req_file: str=None):
     req_cmd = f'python -m pip install -r {req_file}'
     utilities.run_command(req_cmd)
 
+
 def main(argv):
     """Setup environment for Helgrind."""
     LOGGER.debug('Root = %s', _ROOT)
     args = _process_args(argv)
     _validate_python_packages(args.requirements_file)
+
 
 if __name__ == '__main__':
     main(sys.argv[1:])
