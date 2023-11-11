@@ -76,9 +76,9 @@ def logger_setup(logger_name: str, logger_level: int=logging.WARNING) -> logging
     return logger
 
 
-def run_command(cmd_str: str, time_out=None) -> int:
+def run_command(cmd_str: str, time_out=None, cwd=None) -> int:
     """Run cmd_str with optional timeout."""
-    return subprocess.check_call(cmd_str, timeout=time_out)
+    return subprocess.check_call(cmd_str, timeout=time_out, cwd=cwd)
 
 
 def get_root_dir(entry_path: str=None, max_steps: int=10, except_on_fail: bool=True) -> str:

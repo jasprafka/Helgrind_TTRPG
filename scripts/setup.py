@@ -12,6 +12,7 @@ LOGGER = logging.getLogger(os.path.basename(__file__))
 _ROOT = utilities.get_root_dir()
 """Root dir of the worktree."""
 
+
 def _process_args(argv):
     """Parse and process arguments; convert to argparse.Namespace object.
 
