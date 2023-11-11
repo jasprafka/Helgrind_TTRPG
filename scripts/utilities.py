@@ -39,7 +39,7 @@ def parser_setup(parser: argparse.ArgumentParser, argv: list, logger: logging.Lo
         default=False
     )
 
-    argv = parser.parse_args()
+    argv = parser.parse_args(argv)
 
     if logger is not None:
         _logger_config(logger, argv)

@@ -46,6 +46,14 @@ def _process_args(argv):
         action='store_true',
         default=False
     )
+    parser.add_argument(
+        '-f',
+        '--force',
+        help=f'Force push to remote.',
+        dest='force',
+        action='store_true',
+        default=False
+    )
     args = utilities.parser_setup(parser, argv, LOGGER)
     return args
 
@@ -92,11 +100,10 @@ def main(argv):
         _run_unittests()
 
     print(f'Worktree clean and unittests passed, pushing to origin/{args.branch}...')
-    push_cmd = f'git push origin {args.branch}'
+    push_cmd = f'git push origin {args.branch} -f' if args.force else f'git push origin {args.branch}'
     if args.dry_run:
         print(f'Would run {push_cmd}')
     else:
-        pass
         utilities.run_command(push_cmd)
 
 
