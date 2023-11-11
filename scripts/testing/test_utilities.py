@@ -5,6 +5,7 @@ import subprocess
 from unittest import mock
 import utilities
 
+@mock.patch('builtins.print', mock.Mock(auto_spec=True))
 class TestRunCommand(unittest.TestCase):
     """Test cases for run_command()."""
 
