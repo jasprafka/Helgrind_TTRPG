@@ -4,6 +4,7 @@ import setup
 import unittest
 from unittest import mock
 
+@mock.patch('builtins.print', mock.Mock(auto_spec=True))
 class TestMain(unittest.TestCase):
     """Test cases for main()."""
 

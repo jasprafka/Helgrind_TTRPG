@@ -20,6 +20,9 @@ _TEST_RE = os.path.join('scripts', 'testing', 'test_*.py')
 """Glob pattern to match python unittests."""
 
 
+class TestFailedException(Exception):
+    """Exception class for failed unittest."""
+
 def _process_args(argv: list) -> argparse.Namespace:
     """Parse and process arguments; convert to argparse.Namespace object.
 
@@ -53,16 +56,19 @@ def _process_args(argv: list) -> argparse.Namespace:
     return args
 
 
-def _run_test(test_pattern: str) -> None:
+def _run_test(test_pattern: str) -> unittest.TestResult:
     """Run the python unittest specified by test_pattern."""
     test_suite = unittest.defaultTestLoader.discover(_TEST_DIR, test_pattern)
-    unittest.TextTestRunner().run(test_suite)
+    result = unittest.TextTestRunner().run(test_suite)
+    return result
 
 
 def main(argv):
     """Run a unittest."""
     args = _process_args(argv)
-    _run_test(args.test_map[args.test])
+    result = _run_test(args.test_map[args.test])
+    if result.failures or result.errors:
+        raise TestFailedException(f'Unittests failed for "{args.test}" suite!')
 
 
 if __name__ == '__main__':
